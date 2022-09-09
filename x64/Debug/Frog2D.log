@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\whela\source\repos\Frog2D\Frog2D\main.cpp(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Frog2D.vcxproj -> C:\Users\whela\source\repos\Frog2D\x64\Debug\Frog2D.exe
