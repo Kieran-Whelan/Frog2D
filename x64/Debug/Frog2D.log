@@ -1,4 +1,2 @@
-﻿  main.cpp
-C:\Users\whela\source\repos\Frog2D\Frog2D\main.cpp(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\whela\source\repos\Frog2D\Frog2D\main.cpp(94,63): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+﻿  ShaderProgram.cpp
   Frog2D.vcxproj -> C:\Users\whela\source\repos\Frog2D\x64\Debug\Frog2D.exe

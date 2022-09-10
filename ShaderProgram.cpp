@@ -36,9 +36,9 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 
 	id = glCreateProgram();
 
-	glAttachShader(ID, vertexShader);
-	glAttachShader(ID, fragmentShader);
-	glLinkProgram(ID);
+	glAttachShader(id, vertexShader);
+	glAttachShader(id, fragmentShader);
+	glLinkProgram(id);
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
