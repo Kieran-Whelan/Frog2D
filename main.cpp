@@ -9,7 +9,6 @@ const unsigned int width = 1600;
 const unsigned int height = 900;
 const char* title = "Frog2D";
 
-//test
 int main()
 {
     glfwInit();

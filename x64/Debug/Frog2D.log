@@ -1,3 +1,4 @@
 ﻿  main.cpp
 C:\Users\whela\source\repos\Frog2D\Frog2D\main.cpp(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  LINK : C:\Users\whela\source\repos\Frog2D\x64\Debug\Frog2D.exe not found or not built by the last incremental link; performing full link
   Frog2D.vcxproj -> C:\Users\whela\source\repos\Frog2D\x64\Debug\Frog2D.exe
