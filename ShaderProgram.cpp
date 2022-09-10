@@ -27,14 +27,14 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexSource, NULL);
 	glCompileShader(vertexShader);
-	compileErrors(vertexShader, "VERTEX");
+	CompileErrors(vertexShader, "VERTEX");
 
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
 	glCompileShader(fragmentShader);
-	compileErrors(fragmentShader, "FRAGMENT");
+	CompileErrors(fragmentShader, "FRAGMENT");
 
-	ID = glCreateProgram();
+	id = glCreateProgram();
 
 	glAttachShader(ID, vertexShader);
 	glAttachShader(ID, fragmentShader);
@@ -45,17 +45,22 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 
 }
 
-void ShaderProgram::Activate()
+void ShaderProgram::Bind()
 {
-	glUseProgram(ID);
+	glUseProgram(id);
+}
+
+void ShaderProgram::Unbind()
+{
+	glUseProgram(0);
 }
 
 void ShaderProgram::Delete()
 {
-	glDeleteProgram(ID);
+	glDeleteProgram(id);
 }
 
-void ShaderProgram::compileErrors(unsigned int shader, const char* type)
+void ShaderProgram::CompileErrors(unsigned int shader, const char* type)
 {
 	GLint hasCompiled;
 	char infoLog[1024];
