@@ -60,6 +60,12 @@ void ShaderProgram::Delete()
 	glDeleteProgram(id);
 }
 
+void ShaderProgram::SetUniform(const char* uniformName, glm::mat4 matrix4f)
+{
+	GLuint uniformLocation = glGetUniformLocation(id, uniformName);
+	glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix4f));
+}
+
 void ShaderProgram::CompileErrors(unsigned int shader, const char* type)
 {
 	GLint hasCompiled;

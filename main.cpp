@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "ShaderProgram.h";
+#include "Transformation.h";
 
 const unsigned int width = 1600;
 const unsigned int height = 900;
@@ -59,7 +60,6 @@ int main()
     glGenBuffers(1, &vertex_buffer_object);
     {
         glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object);
-        //glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * 3, quad_vertices, GL_STATIC_DRAW);
         glBufferData(GL_ARRAY_BUFFER, quadVertices.size() * sizeof(glm::vec3), quadVertices.data(), GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
@@ -77,6 +77,7 @@ int main()
     }
 
     ShaderProgram shaderProgram("vertex.glsl", "fragment.glsl");
+    glm::vec2 position = glm::vec2(1.0f, 1.0f);
 
     while (!glfwWindowShouldClose(window)) {
         glClearColor(0.17f, 0.13f, 0.17f, 1.0f);
@@ -84,11 +85,29 @@ int main()
         double current_seconds = glfwGetTime();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
             glfwSetWindowShouldClose(window, GL_TRUE);
         }
 
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+            position.y += 0.01f;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+            position.y -= 0.01f;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+            position.x += 0.01f;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+            position.x -= 0.01f;
+        }
+
         shaderProgram.Bind();
+        shaderProgram.SetUniform("transformationMatrix", GetTransformationMatrix(position));
 
         glBindVertexArray(vertex_array_object);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, quadVertices.size());
