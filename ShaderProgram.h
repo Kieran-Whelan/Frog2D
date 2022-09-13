@@ -11,19 +11,19 @@
 #include <iostream>
 #include <cerrno>
 
-std::string get_file_contents(const char* filename);
+std::string getFileContents(const char* filename);
 
 class ShaderProgram
 {
-public:
-	GLuint id;
-	ShaderProgram(const char* vertexFile, const char* fragmentFile);
+	public:
+		GLuint ID;
+		ShaderProgram(const char* vertexFile, const char* fragmentFile);
 
-	void Bind();
-	void Unbind();
-	void Delete();
-	void SetUniform(const char* uniformName, glm::mat4 matrix4f);
-	void CompileErrors(unsigned int shader, const char* type);
+		void bind();
+		void unbind();
+		void remove();
+		void setUniform(const char* uniformName, glm::mat4 matrix4f);
+		void compileErrors(unsigned int shader, const char* type);
 };
 
 #endif

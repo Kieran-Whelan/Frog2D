@@ -7,6 +7,8 @@
 
 #include "ShaderProgram.h";
 #include "Transformation.h";
+#include "VBO.h";
+#include "VAO.h";
 
 const unsigned int width = 1600;
 const unsigned int height = 900;
@@ -56,33 +58,19 @@ int main()
     quadVertices[4] = glm::vec3(0.5f, 0.5f, 0.0f);
     quadVertices[5] = glm::vec3(-0.5f, 0.5f, 0.0f);
 
-    GLuint vertex_buffer_object = 0;
-    glGenBuffers(1, &vertex_buffer_object);
-    {
-        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object);
-        glBufferData(GL_ARRAY_BUFFER, quadVertices.size() * sizeof(glm::vec3), quadVertices.data(), GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-    }
+    VAO vao;
+    vao.bind();
 
-    GLuint vertex_array_object = 0;
-    glGenVertexArrays(1, &vertex_array_object);
-    {
-        glBindVertexArray(vertex_array_object);
-
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
-    }
+    VBO vbo(quadVertices);
+    vao.link(vbo);
+    vao.unbind();
 
     ShaderProgram shaderProgram("vertex.glsl", "fragment.glsl");
-    glm::vec2 position = glm::vec2(1.0f, 1.0f);
+    glm::vec2 position = glm::vec2(0.0f, 0.0f);
 
     while (!glfwWindowShouldClose(window)) {
         glClearColor(0.17f, 0.13f, 0.17f, 1.0f);
 
-        double current_seconds = glfwGetTime();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -106,14 +94,14 @@ int main()
             position.x -= 0.01f;
         }
 
-        shaderProgram.Bind();
-        shaderProgram.SetUniform("transformationMatrix", GetTransformationMatrix(position));
+        shaderProgram.bind();
+        shaderProgram.setUniform("transformationMatrix", getTransformationMatrix(position));
 
-        glBindVertexArray(vertex_array_object);
+        vao.bind();
         glDrawArrays(GL_TRIANGLE_STRIP, 0, quadVertices.size());
-        glBindVertexArray(0);
+        vao.unbind();
 
-        shaderProgram.Unbind();
+        shaderProgram.unbind();
 
         glfwPollEvents();
         glfwSwapBuffers(window);

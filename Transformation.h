@@ -5,7 +5,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-glm::mat4 GetTransformationMatrix(glm::vec2 position);
+//bad practice to be changed
+glm::mat4 getTransformationMatrix(glm::vec2 position);
 
 #endif
 

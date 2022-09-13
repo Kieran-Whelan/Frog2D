@@ -1,6 +1,6 @@
 #include "ShaderProgram.h"
 
-std::string get_file_contents(const char* filename)
+std::string getFileContents(const char* filename)
 {
 	std::ifstream in(filename, std::ios::binary);
 	if (in)
@@ -18,8 +18,8 @@ std::string get_file_contents(const char* filename)
 
 ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 {
-	std::string vertexCode = get_file_contents(vertexFile);
-	std::string fragmentCode = get_file_contents(fragmentFile);
+	std::string vertexCode = getFileContents(vertexFile);
+	std::string fragmentCode = getFileContents(fragmentFile);
 
 	const char* vertexSource = vertexCode.c_str();
 	const char* fragmentSource = fragmentCode.c_str();
@@ -27,46 +27,46 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexSource, NULL);
 	glCompileShader(vertexShader);
-	CompileErrors(vertexShader, "VERTEX");
+	compileErrors(vertexShader, "VERTEX");
 
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
 	glCompileShader(fragmentShader);
-	CompileErrors(fragmentShader, "FRAGMENT");
+	compileErrors(fragmentShader, "FRAGMENT");
 
-	id = glCreateProgram();
+	ID = glCreateProgram();
 
-	glAttachShader(id, vertexShader);
-	glAttachShader(id, fragmentShader);
-	glLinkProgram(id);
+	glAttachShader(ID, vertexShader);
+	glAttachShader(ID, fragmentShader);
+	glLinkProgram(ID);
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
 }
 
-void ShaderProgram::Bind()
+void ShaderProgram::bind()
 {
-	glUseProgram(id);
+	glUseProgram(ID);
 }
 
-void ShaderProgram::Unbind()
+void ShaderProgram::unbind()
 {
 	glUseProgram(0);
 }
 
-void ShaderProgram::Delete()
+void ShaderProgram::remove()
 {
-	glDeleteProgram(id);
+	glDeleteProgram(ID);
 }
 
-void ShaderProgram::SetUniform(const char* uniformName, glm::mat4 matrix4f)
+void ShaderProgram::setUniform(const char* uniformName, glm::mat4 matrix4f)
 {
-	GLuint uniformLocation = glGetUniformLocation(id, uniformName);
+	GLuint uniformLocation = glGetUniformLocation(ID, uniformName);
 	glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix4f));
 }
 
-void ShaderProgram::CompileErrors(unsigned int shader, const char* type)
+void ShaderProgram::compileErrors(unsigned int shader, const char* type)
 {
 	GLint hasCompiled;
 	char infoLog[1024];
