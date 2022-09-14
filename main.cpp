@@ -7,8 +7,7 @@
 
 #include "ShaderProgram.h";
 #include "Transformation.h";
-#include "VBO.h";
-#include "VAO.h";
+#include "Sprite.h";
 
 const unsigned int width = 1600;
 const unsigned int height = 900;
@@ -58,12 +57,7 @@ int main()
     quadVertices[4] = glm::vec3(0.5f, 0.5f, 0.0f);
     quadVertices[5] = glm::vec3(-0.5f, 0.5f, 0.0f);
 
-    VAO vao;
-    vao.bind();
-
-    VBO vbo(quadVertices);
-    vao.link(vbo);
-    vao.unbind();
+    Sprite sprite(quadVertices);
 
     ShaderProgram shaderProgram("vertex.glsl", "fragment.glsl");
     glm::vec2 position = glm::vec2(0.0f, 0.0f);
@@ -97,9 +91,9 @@ int main()
         shaderProgram.bind();
         shaderProgram.setUniform("transformationMatrix", getTransformationMatrix(position));
 
-        vao.bind();
+        sprite.bind();
         glDrawArrays(GL_TRIANGLE_STRIP, 0, quadVertices.size());
-        vao.unbind();
+        sprite.unbind();
 
         shaderProgram.unbind();
 
