@@ -1,17 +1,29 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
 #include <glm/glm.hpp>
+#include <iostream>
 #include <vector>
-#include <fstream>
+#include <Windows.h>
 
-#include "ShaderProgram.h";
-#include "Transformation.h";
-#include "Sprite.h";
+#include "ShaderProgram.hpp";
+#include "Transformation.hpp";
+#include "Sprite.hpp";
 
 const unsigned int width = 1600;
 const unsigned int height = 900;
 const char* title = "Frog2D";
+
+void getDesktopResolution(int& horizontal, int& vertical)
+{
+   RECT desktop;
+
+   const HWND hDesktop = GetDesktopWindow();
+
+   GetWindowRect(hDesktop, &desktop);
+
+   horizontal = desktop.right;
+   vertical = desktop.bottom;
+}
 
 int main()
 {
@@ -24,10 +36,17 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    //glfwWindowHint(GLFW_DECORATED, GLFW_FALSE); //borderless
+    glfwWindowHint(GLFW_DECORATED, GLFW_FALSE); //borderless
+    //glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE); //fullscreen
+
+    int horizontal = 0;
+    int vertical = 0;
+    getDesktopResolution(horizontal, vertical);
 
     GLFWwindow* window = glfwCreateWindow(width, height, title, NULL, NULL);
-    glfwSetWindowPos(window, 100, 100);
+    //sets window to center of screen 
+    glfwSetWindowPos(window, horizontal / 2 - width / 2, vertical / 2 - height / 2);
+    //glfwSetWindowPos(window, 0, 0); //fullscreen
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -38,6 +57,7 @@ int main()
 
     gladLoadGL();
 
+    //glViewport(0, 0, 1920, 1080); //fullscreen
     glViewport(0, 0, width, height);
 
     float triangle_vertices[] = {

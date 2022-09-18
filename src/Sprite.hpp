@@ -4,8 +4,8 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-#include "VAO.h"
-#include "VBO.h"
+#include "VAO.hpp";
+#include "VBO.hpp";
 
 class Sprite
 {

@@ -1,4 +1,4 @@
-#include "Sprite.h"
+#include "Sprite.hpp";
 
 Sprite::Sprite(std::vector<glm::vec3> vec)
 {

@@ -7,12 +7,12 @@ cmake_minimum_required(VERSION 3.20.0)
 project(Frog2D)
 
 add_executable(${PROJECT_NAME} src/main.cpp 
-src/glad.c 
-src/ShaderProgram.cpp src/ShaderProgram.h 
-src/Sprite.cpp src/Sprite.h
-src/Transformation.cpp src/Transformation.h
-src/VAO.cpp src/VAO.h
-src/VBO.cpp src/VBO.h
+        src/glad.c 
+        src/ShaderProgram.cpp src/ShaderProgram.hpp 
+        src/Sprite.cpp src/Sprite.hpp
+        src/Transformation.cpp src/Transformation.hpp
+        src/VAO.cpp src/VAO.hpp
+        src/VBO.cpp src/VBO.hpp
 )
 
 #had to build glfw from source or else it doesnt work
