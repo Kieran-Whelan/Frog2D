@@ -13,7 +13,6 @@ src/Sprite.cpp src/Sprite.h
 src/Transformation.cpp src/Transformation.h
 src/VAO.cpp src/VAO.h
 src/VBO.cpp src/VBO.h
-src/fragment.glsl src/vertex.glsl
 )
 
 #had to build glfw from source or else it doesnt work

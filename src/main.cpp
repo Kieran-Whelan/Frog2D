@@ -3,6 +3,7 @@
 #include <iostream>
 #include <glm/glm.hpp>
 #include <vector>
+#include <fstream>
 
 #include "ShaderProgram.h";
 #include "Transformation.h";
@@ -45,7 +46,7 @@ int main()
         -0.5f, -0.5f, 0.0f
     };
 
-        std::vector<glm::vec3> quadVertices;
+    std::vector<glm::vec3> quadVertices;
 
     quadVertices.resize(6);
 
@@ -58,10 +59,12 @@ int main()
 
     Sprite sprite(quadVertices);
 
-    char* vertex = "#version 400\n in vec2 position;\n//out vec2 textureCoords;\nuniform mat4 transformationMatrix;\nvoid main() {\ngl_Position = transformationMatrix * vec4(position, 0.0, 1.0);\n//textureCoords = vec2((position.x + 1.0) / 2, 1 - (position.y + 1.0) / 2);\n}";
+    char* vertex = "#version 400\nin vec2 position;\n//out vec2 textureCoords;\nuniform mat4 transformationMatrix;\nvoid main() {\ngl_Position = transformationMatrix * vec4(position, 0.0, 1.0);\n//textureCoords = vec2((position.x + 1.0) / 2, 1 - (position.y + 1.0) / 2);\n}";
     char* frag = "#version 400\nout vec4 outColour;\nvoid main() {\noutColour = vec4(1.0, 1.0, 0.0, 1.0);\n}";
 
-    ShaderProgram shaderProgram(vertex, frag);
+    //std::cout << vertex;
+
+    ShaderProgram shaderProgram("res/shaders/vertex.glsl", "res/shaders/fragment.glsl");
     glm::vec2 position = glm::vec2(0.0f, 0.0f);
 
     while (!glfwWindowShouldClose(window)) {
@@ -70,23 +73,28 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) 
+        {
             glfwSetWindowShouldClose(window, GL_TRUE);
         }
 
-        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
+        {
             position.y += 0.01f;
         }
 
-        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) 
+        {
             position.y -= 0.01f;
         }
 
-        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) 
+        {
             position.x += 0.01f;
         }
 
-        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) 
+        {
             position.x -= 0.01f;
         }
 

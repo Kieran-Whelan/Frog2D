@@ -3,6 +3,8 @@
         "glfw"
     ],
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "xstring": "cpp",
+        "fstream": "cpp"
     }
 }
