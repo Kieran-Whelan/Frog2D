@@ -1,2 +1,2 @@
-# Frog2D
-My 2D OpenGl Game Engine with build tools
+# OpenGL-Boilerplate
+ My OpenGL boilerplate for C++ and CMake
