@@ -15,7 +15,6 @@ add_executable(${PROJECT_NAME} src/main.cpp
         src/VBO.cpp src/VBO.hpp
 )
 
-#had to build glfw from source or else it doesnt work
 FetchContent_Declare(
         glfw
         GIT_REPOSITORY https://github.com/glfw/glfw.git
