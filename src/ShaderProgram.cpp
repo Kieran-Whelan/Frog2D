@@ -1,5 +1,7 @@
 #include "ShaderProgram.hpp";
 
+const std::string SHADER_PATH = "res/shaders/";
+
 /*
 std::string getFileContents(const char* filename)
 {
@@ -24,9 +26,10 @@ std::string getFileContents(const char* filename)
 }
 */
 
-std::string getFileContents(const char* filename)
+std::string getFileContents(const std::string filename)
 {
-	std::ifstream in(filename, std::ios::binary);
+	std::string file = SHADER_PATH + filename;
+	std::ifstream in(file.c_str(), std::ios::binary);
 	if (in)
 	{
 		std::string contents;

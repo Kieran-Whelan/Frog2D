@@ -79,12 +79,7 @@ int main()
 
     Sprite sprite(quadVertices);
 
-    char* vertex = "#version 400\nin vec2 position;\n//out vec2 textureCoords;\nuniform mat4 transformationMatrix;\nvoid main() {\ngl_Position = transformationMatrix * vec4(position, 0.0, 1.0);\n//textureCoords = vec2((position.x + 1.0) / 2, 1 - (position.y + 1.0) / 2);\n}";
-    char* frag = "#version 400\nout vec4 outColour;\nvoid main() {\noutColour = vec4(1.0, 1.0, 0.0, 1.0);\n}";
-
-    //std::cout << vertex;
-
-    ShaderProgram shaderProgram("res/shaders/vertex.glsl", "res/shaders/fragment.glsl");
+    ShaderProgram shaderProgram("vertex.glsl", "fragment.glsl");
     glm::vec2 position = glm::vec2(0.0f, 0.0f);
 
     while (!glfwWindowShouldClose(window)) {
