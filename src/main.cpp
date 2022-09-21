@@ -6,23 +6,31 @@
 #include <Windows.h>
 
 #include "ShaderProgram.hpp";
-#include "Transformation.hpp";
 #include "Sprite.hpp";
+#include "Transformation.hpp"
 
 const unsigned int width = 1600;
 const unsigned int height = 900;
 const char* title = "Frog2D";
 
-void getDesktopResolution(int& horizontal, int& vertical)
+float getDesktopWidth()
 {
-   RECT desktop;
+    RECT desktop;
+    const HWND hDesktop = GetDesktopWindow();
 
-   const HWND hDesktop = GetDesktopWindow();
+    GetWindowRect(hDesktop, &desktop);
 
-   GetWindowRect(hDesktop, &desktop);
+    return desktop.right;
+}
 
-   horizontal = desktop.right;
-   vertical = desktop.bottom;
+float getDesktopHeight()
+{
+    RECT desktop;
+    const HWND hDesktop = GetDesktopWindow();
+
+    GetWindowRect(hDesktop, &desktop);
+
+    return desktop.bottom;
 }
 
 int main()
@@ -39,13 +47,9 @@ int main()
     glfwWindowHint(GLFW_DECORATED, GLFW_FALSE); //borderless
     //glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE); //fullscreen
 
-    int horizontal = 0;
-    int vertical = 0;
-    getDesktopResolution(horizontal, vertical);
-
     GLFWwindow* window = glfwCreateWindow(width, height, title, NULL, NULL);
     //sets window to center of screen 
-    glfwSetWindowPos(window, horizontal / 2 - width / 2, vertical / 2 - height / 2);
+    glfwSetWindowPos(window, getDesktopWidth() / 2 - width / 2, getDesktopHeight() / 2 - height / 2);
     //glfwSetWindowPos(window, 0, 0); //fullscreen
     if (window == NULL)
     {

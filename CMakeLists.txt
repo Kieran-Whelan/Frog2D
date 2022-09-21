@@ -6,7 +6,8 @@ cmake_minimum_required(VERSION 3.20.0)
 
 project(Frog2D)
 
-add_executable(${PROJECT_NAME} src/main.cpp 
+add_executable(${PROJECT_NAME} 
+        src/main.cpp 
         src/glad.c 
         src/ShaderProgram.cpp src/ShaderProgram.hpp 
         src/Sprite.cpp src/Sprite.hpp
