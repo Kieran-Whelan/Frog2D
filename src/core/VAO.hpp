@@ -5,8 +5,10 @@
 
 class VAO
 {
+	private:
+		GLuint id;
+
 	public:
-		GLuint ID;
 		VAO();
 
 		void link(VBO VBO);

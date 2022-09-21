@@ -8,56 +8,16 @@
 #include "core/ShaderProgram.hpp";
 #include "core/Sprite.hpp";
 #include "core/Transformation.hpp"
+#include "core/Window.hpp"
 
 const unsigned int width = 1600;
 const unsigned int height = 900;
-const char* title = "Frog2D";
-
-float getDesktopWidth()
-{
-    RECT desktop;
-    const HWND hDesktop = GetDesktopWindow();
-
-    GetWindowRect(hDesktop, &desktop);
-
-    return desktop.right;
-}
-
-float getDesktopHeight()
-{
-    RECT desktop;
-    const HWND hDesktop = GetDesktopWindow();
-
-    GetWindowRect(hDesktop, &desktop);
-
-    return desktop.bottom;
-}
+char* title = "Frog2D";
 
 int main()
 {
-    glfwInit();
-
-    glfwDefaultWindowHints();
-    glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_DECORATED, GLFW_FALSE); //borderless
-    //glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE); //fullscreen
-
-    GLFWwindow* window = glfwCreateWindow(width, height, title, NULL, NULL);
-    //sets window to center of screen 
-    glfwSetWindowPos(window, getDesktopWidth() / 2 - width / 2, getDesktopHeight() / 2 - height / 2);
-    //glfwSetWindowPos(window, 0, 0); //fullscreen
-    if (window == NULL)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
+    Window window(title, width, height);
+    window.createWindow();
 
     gladLoadGL();
 
@@ -86,33 +46,33 @@ int main()
     ShaderProgram shaderProgram("vertex.glsl", "fragment.glsl");
     glm::vec2 position = glm::vec2(0.0f, 0.0f);
 
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window.getWindow())) {
         glClearColor(0.17f, 0.13f, 0.17f, 1.0f);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) 
+        if (glfwGetKey(window.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) 
         {
-            glfwSetWindowShouldClose(window, GL_TRUE);
+            glfwSetWindowShouldClose(window.getWindow(), GL_TRUE);
         }
 
-        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
+        if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) 
         {
             position.y += 0.01f;
         }
 
-        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) 
+        if (glfwGetKey(window.getWindow(), GLFW_KEY_S) == GLFW_PRESS) 
         {
             position.y -= 0.01f;
         }
 
-        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) 
+        if (glfwGetKey(window.getWindow(), GLFW_KEY_A) == GLFW_PRESS) 
         {
             position.x += 0.01f;
         }
 
-        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) 
+        if (glfwGetKey(window.getWindow(), GLFW_KEY_D) == GLFW_PRESS) 
         {
             position.x -= 0.01f;
         }
@@ -127,10 +87,10 @@ int main()
         shaderProgram.unbind();
 
         glfwPollEvents();
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(window.getWindow());
     }
 
-    glfwDestroyWindow(window);
+    glfwDestroyWindow(window.getWindow());
     glfwTerminate();
     return 0;
 }

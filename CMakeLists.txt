@@ -14,6 +14,7 @@ add_executable(${PROJECT_NAME}
         src/core/Transformation.cpp src/core/Transformation.hpp
         src/core/VAO.cpp src/core/VAO.hpp
         src/core/VBO.cpp src/core/VBO.hpp
+	src/core/Window.cpp src/core/Window.hpp
 )
 
 FetchContent_Declare(

@@ -2,7 +2,7 @@
 
 VAO::VAO()
 {
-    glGenVertexArrays(1, &ID);
+    glGenVertexArrays(1, &this->id);
 }
 
 void VAO::link(VBO VBO)
@@ -15,7 +15,7 @@ void VAO::link(VBO VBO)
 
 void VAO::bind()
 {
-    glBindVertexArray(ID);
+    glBindVertexArray(this->id);
 }
 
 void VAO::unbind()
@@ -25,5 +25,5 @@ void VAO::unbind()
 
 void VAO::remove()
 {
-    glDeleteVertexArrays(1, &ID);
+    glDeleteVertexArrays(1, &this->id);
 }

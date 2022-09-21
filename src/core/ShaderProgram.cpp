@@ -1,6 +1,6 @@
 #include "ShaderProgram.hpp";
 
-const std::string SHADER_PATH = "res/shaders/";
+const std::string shaderPath = "res/shaders/";
 
 /*
 std::string getFileContents(const char* filename)
@@ -28,7 +28,7 @@ std::string getFileContents(const char* filename)
 
 std::string getFileContents(const std::string filename)
 {
-	std::string file = SHADER_PATH + filename;
+	std::string file = shaderPath + filename;
 	std::ifstream in(file.c_str(), std::ios::binary);
 	if (in)
 	{
@@ -64,11 +64,11 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 	glCompileShader(fragmentShader);
 	compileErrors(fragmentShader, "FRAGMENT");
 
-	ID = glCreateProgram();
+	this->id = glCreateProgram();
 
-	glAttachShader(ID, vertexShader);
-	glAttachShader(ID, fragmentShader);
-	glLinkProgram(ID);
+	glAttachShader(this->id, vertexShader);
+	glAttachShader(this->id, fragmentShader);
+	glLinkProgram(this->id);
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
@@ -76,7 +76,7 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 
 void ShaderProgram::bind()
 {
-	glUseProgram(ID);
+	glUseProgram(this->id);
 }
 
 void ShaderProgram::unbind()
@@ -86,12 +86,12 @@ void ShaderProgram::unbind()
 
 void ShaderProgram::remove()
 {
-	glDeleteProgram(ID);
+	glDeleteProgram(this->id);
 }
 
 void ShaderProgram::setUniform(const char* uniformName, glm::mat4 matrix4f)
 {
-	GLuint uniformLocation = glGetUniformLocation(ID, uniformName);
+	GLuint uniformLocation = glGetUniformLocation(this->id, uniformName);
 	glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix4f));
 }
 

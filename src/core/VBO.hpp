@@ -9,14 +9,15 @@
 
 class VBO
 {
+	private:
+		GLuint id;
+
 	public:
-		GLuint ID;
         VBO(std::vector<glm::vec3> vertices);
 
 		void bind();
 		void unbind();
 		void remove();
-
 };
 
 #endif
