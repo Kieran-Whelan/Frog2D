@@ -19,24 +19,23 @@ Window::Window(char* title, unsigned int width, unsigned int height)
     //glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE); //fullscreen
 }
 
-float Window::getWindowX()
+RECT Window::getDesktop()
 {
     RECT desktop;
     const HWND hDesktop = GetDesktopWindow();
 
     GetWindowRect(hDesktop, &desktop);
+    return desktop;
+}
 
-    return desktop.right;
+float Window::getWindowX()
+{
+    return getDesktop().right;
 }
 
 float Window::getWindowY()
 {
-    RECT desktop;
-    const HWND hDesktop = GetDesktopWindow();
-
-    GetWindowRect(hDesktop, &desktop);
-
-    return desktop.bottom;
+    return getDesktop().bottom;
 }
 
 int Window::createWindow()

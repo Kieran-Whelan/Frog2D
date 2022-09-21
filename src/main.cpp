@@ -7,7 +7,7 @@
 
 #include "core/ShaderProgram.hpp";
 #include "core/Sprite.hpp";
-#include "core/Transformation.hpp"
+#include "core/math/Transformation.hpp"
 #include "core/Window.hpp"
 
 const unsigned int width = 1600;

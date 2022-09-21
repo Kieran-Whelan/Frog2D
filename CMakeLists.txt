@@ -11,9 +11,9 @@ add_executable(${PROJECT_NAME}
         src/glad.c 
         src/core/ShaderProgram.cpp src/core/ShaderProgram.hpp 
         src/core/Sprite.cpp src/core/Sprite.hpp
-        src/core/Transformation.cpp src/core/Transformation.hpp
-        src/core/VAO.cpp src/core/VAO.hpp
-        src/core/VBO.cpp src/core/VBO.hpp
+        src/core/math/Transformation.cpp src/core/math/Transformation.hpp
+        src/core/math/VAO.cpp src/core/math/VAO.hpp
+        src/core/math/VBO.cpp src/core/math/VBO.hpp
 	src/core/Window.cpp src/core/Window.hpp
 )
 

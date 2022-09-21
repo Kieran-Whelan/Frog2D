@@ -15,6 +15,7 @@ class Window
 
         float getWindowX();
         float getWindowY();
+        RECT getDesktop();
     public:
         Window(char* title, unsigned int width, unsigned int height);
 
