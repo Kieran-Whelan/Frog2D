@@ -5,9 +5,9 @@
 #include <vector>
 #include <Windows.h>
 
-#include "ShaderProgram.hpp";
-#include "Sprite.hpp";
-#include "Transformation.hpp"
+#include "core/ShaderProgram.hpp";
+#include "core/Sprite.hpp";
+#include "core/Transformation.hpp"
 
 const unsigned int width = 1600;
 const unsigned int height = 900;

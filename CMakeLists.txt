@@ -9,11 +9,11 @@ project(Frog2D)
 add_executable(${PROJECT_NAME} 
         src/main.cpp 
         src/glad.c 
-        src/ShaderProgram.cpp src/ShaderProgram.hpp 
-        src/Sprite.cpp src/Sprite.hpp
-        src/Transformation.cpp src/Transformation.hpp
-        src/VAO.cpp src/VAO.hpp
-        src/VBO.cpp src/VBO.hpp
+        src/core/ShaderProgram.cpp src/core/ShaderProgram.hpp 
+        src/core/Sprite.cpp src/core/Sprite.hpp
+        src/core/Transformation.cpp src/core/Transformation.hpp
+        src/core/VAO.cpp src/core/VAO.hpp
+        src/core/VBO.cpp src/core/VBO.hpp
 )
 
 FetchContent_Declare(
