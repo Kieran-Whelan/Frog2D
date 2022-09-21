@@ -52,6 +52,28 @@ int Window::createWindow()
         return -1;
     }
     glfwMakeContextCurrent(window);
+
+    gladLoadGL();
+
+    //glViewport(0, 0, 1920, 1080); //fullscreen
+    glViewport(0, 0, this->width, this->height);
+}
+
+void Window::update()
+{
+    glfwPollEvents();
+    glfwSwapBuffers(this->window);
+}
+
+void Window::quit()
+{
+    glfwDestroyWindow(this->window);
+    glfwTerminate();
+}
+
+bool Window::isQuit()
+{
+    return glfwWindowShouldClose(this->window);
 }
 
 GLFWwindow* Window::getWindow()

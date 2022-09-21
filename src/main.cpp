@@ -1,4 +1,4 @@
-#include <glad/glad.h>
+#include <glad/glad.h> //glad always needs to go above glfw
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <iostream>
@@ -18,11 +18,6 @@ int main()
 {
     Window window(title, width, height);
     window.createWindow();
-
-    gladLoadGL();
-
-    //glViewport(0, 0, 1920, 1080); //fullscreen
-    glViewport(0, 0, width, height);
 
     float triangle_vertices[] = {
         0.0f, 0.5f, 0.0f,
@@ -46,7 +41,7 @@ int main()
     ShaderProgram shaderProgram("vertex.glsl", "fragment.glsl");
     glm::vec2 position = glm::vec2(0.0f, 0.0f);
 
-    while (!glfwWindowShouldClose(window.getWindow())) {
+    while (!window.isQuit()) {
         glClearColor(0.17f, 0.13f, 0.17f, 1.0f);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -86,11 +81,9 @@ int main()
 
         shaderProgram.unbind();
 
-        glfwPollEvents();
-        glfwSwapBuffers(window.getWindow());
+        window.update();
     }
 
-    glfwDestroyWindow(window.getWindow());
-    glfwTerminate();
+    window.quit();
     return 0;
 }
