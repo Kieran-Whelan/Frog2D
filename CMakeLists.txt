@@ -15,6 +15,7 @@ add_executable(${PROJECT_NAME}
         src/core/math/VAO.cpp src/core/math/VAO.hpp
         src/core/math/VBO.cpp src/core/math/VBO.hpp
 	src/core/Window.cpp src/core/Window.hpp
+	src/core/EngineManager.cpp src/core/EngineManager.hpp
 )
 
 FetchContent_Declare(

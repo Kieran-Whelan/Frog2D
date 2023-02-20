@@ -7,6 +7,7 @@
 
 //bad practice to be changed
 glm::mat4 getTransformationMatrix(glm::vec2 position);
+glm::mat4 getTransformationMatrix(glm::vec2 position, glm::vec2 scale);
 
 #endif
 

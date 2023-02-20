@@ -9,9 +9,10 @@
 
 class Sprite
 {
-	public:
+	private:
 		std::vector<glm::vec3> vertices;
 		VAO vao;
+	public:
 		Sprite(std::vector<glm::vec3> vec);
 
 		void bind();

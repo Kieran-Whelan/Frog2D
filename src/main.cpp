@@ -14,6 +14,9 @@ const unsigned int width = 1600;
 const unsigned int height = 900;
 char* title = "Frog2D";
 
+/*
+    Note to self: build using vscode cmake: build command
+*/
 int main()
 {
     Window window(title, width, height);
@@ -40,6 +43,8 @@ int main()
 
     ShaderProgram shaderProgram("vertex.glsl", "fragment.glsl");
     glm::vec2 position = glm::vec2(0.0f, 0.0f);
+    //2.0f scale fills full screen
+    glm::vec2 scale = glm::vec2(2.0f, 2.0f);
 
     while (!window.isQuit()) {
         glClearColor(0.17f, 0.13f, 0.17f, 1.0f);
@@ -73,7 +78,7 @@ int main()
         }
 
         shaderProgram.bind();
-        shaderProgram.setUniform("transformationMatrix", getTransformationMatrix(position));
+        shaderProgram.setUniform("transformationMatrix", getTransformationMatrix(position, scale));
 
         sprite.bind();
         glDrawArrays(GL_TRIANGLE_STRIP, 0, quadVertices.size());
